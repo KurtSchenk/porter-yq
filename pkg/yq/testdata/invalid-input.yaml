@@ -1,5 +1,5 @@
 install:
-  - skeletor:
+  - yq:
       description: "Invalid Input Test Case"
       args:
       - yarrrr

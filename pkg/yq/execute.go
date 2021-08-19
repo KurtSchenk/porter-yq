@@ -1,4 +1,4 @@
-package skeletor
+package yq
 
 import (
 	"get.porter.sh/porter/pkg/exec/builder"
