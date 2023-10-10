@@ -1,3 +1,6 @@
+# instead of running make commadns below in WSL / Ubuntu I ran in goland container and this worked with my bundle also using debian:bullseye
+docker run -it -v /home/src/squillace/porter-yq:/go/src golang:bullseye bash
+
 # A Porter Mixin Skeleton
 
 [![Build Status](https://dev.azure.com/getporter/porter/_apis/build/status/yq?branchName=main)](https://dev.azure.com/getporter/porter/_build/latest?definitionId=13&branchName=main)
