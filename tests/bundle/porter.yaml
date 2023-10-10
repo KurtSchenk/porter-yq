@@ -8,7 +8,7 @@
 schemaVersion: 1.0.0
 
 # Name of the bundle
-name: porter-hello
+name: porter-custom-mixin
 
 # Version of the bundle. Change this each time you modify a published bundle.
 version: 0.1.0
@@ -39,6 +39,11 @@ install:
       description: "Test yq mixin"
       arguments: 
         - "--version"
+  - yq:
+      description: "yq data.xml" # has dependency on jq, so need to install
+      arguments:
+        - "'.name'"
+        - "data.yaml"
 
 # Define the steps that should execute when the bundle is upgraded
 upgrade:
