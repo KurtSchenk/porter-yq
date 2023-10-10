@@ -44,6 +44,16 @@ install:
       arguments:
         - "'.name'"
         - "data.yaml"
+      outputs:
+        - name: name
+          regex: "(.*)"
+  - exec:
+      description: "Output name"
+      command: ./helpers.sh
+      arguments:
+        - write
+#        - "Hello there"
+        - ${  bundle.outputs.name }
 
 # Define the steps that should execute when the bundle is upgraded
 upgrade:
@@ -60,6 +70,12 @@ uninstall:
       command: ./helpers.sh
       arguments:
         - uninstall
+
+outputs:
+  - name: name
+    description: "Name parsed data.yaml"
+    applyTo:
+      - "install"
 
 # Below is an example of how to define credentials
 # See https://getporter.org/author-bundles/#credentials
