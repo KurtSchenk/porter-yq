@@ -49,7 +49,8 @@ generate: packr2
 HAS_PACKR2 := $(shell command -v packr2)
 packr2:
 ifndef HAS_PACKR2
-	$(GO) get -u github.com/gobuffalo/packr/v2/packr2
+	$(GO) install github.com/gobuffalo/packr/v2/packr2
+#	$(GO) get -u github.com/gobuffalo/packr/v2/packr2
 endif
 
 xbuild-all: generate
@@ -63,6 +64,7 @@ xbuild: $(BINDIR)/$(VERSION)/$(MIXIN)-$(CLIENT_PLATFORM)-$(CLIENT_ARCH)$(FILE_EX
 $(BINDIR)/$(VERSION)/$(MIXIN)-$(CLIENT_PLATFORM)-$(CLIENT_ARCH)$(FILE_EXT):
 	mkdir -p $(dir $@)
 	GOOS=$(CLIENT_PLATFORM) GOARCH=$(CLIENT_ARCH) $(XBUILD) -o $@ ./cmd/$(MIXIN)
+# CGO_ENABLED=0 did not help  /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.32' not found 
 
 test: test-unit test-integration
 	$(BINDIR)/$(MIXIN)$(FILE_EXT) version
