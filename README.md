@@ -1,4 +1,4 @@
-# instead of running make commadns below in WSL / Ubuntu I ran in goland container and this worked with my bundle also using debian:bullseye
+# TODO instead of running make commadns below in WSL / Ubuntu I ran in goland container and this worked with my bundle also using debian:bullseye
 docker run -it -v /home/src/squillace/porter-yq:/go/src golang:bullseye bash
 
 # A Porter Mixin Skeleton

@@ -23,6 +23,17 @@ registry: "localhost:5000"
 # See https://getporter.org/bundle/custom-dockerfile/
 dockerfile: template.Dockerfile
 
+outputs:
+  - name: name
+    type: string
+    default: "A name default"
+    applyTo:
+      - "install"
+  - name: test_output
+    type: string
+    applyTo:
+      - "install"
+
 # Declare and optionally configure the mixins used by the bundle
 mixins:
   - exec
@@ -35,6 +46,9 @@ install:
       command: ./helpers.sh
       arguments:
         - install
+      outputs:
+      - name: test_output
+        regex: "(.*)"
   - yq:
       description: "Test yq mixin"
       arguments: 
@@ -71,11 +85,6 @@ uninstall:
       arguments:
         - uninstall
 
-outputs:
-  - name: name
-    description: "Name parsed data.yaml"
-    applyTo:
-      - "install"
 
 # Below is an example of how to define credentials
 # See https://getporter.org/author-bundles/#credentials
