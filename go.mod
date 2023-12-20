@@ -1,6 +1,6 @@
 module github.com/squillace/porter-yq
 
-go 1.13
+go 1.18
 
 require (
 	get.porter.sh/porter v0.29.1
