@@ -3,10 +3,13 @@
 package main
 
 import (
+	"fmt"
 	"os"
 
 	"get.porter.sh/magefiles/mixins"
 	"get.porter.sh/magefiles/releases"
+	"github.com/carolynvs/magex/shx"
+	"github.com/magefile/mage/sh"
 )
 
 const (
@@ -16,6 +19,8 @@ const (
 )
 
 var magefile = mixins.NewMagefile(mixinPackage, mixinName, mixinBin)
+
+var must = shx.CommandBuilder{StopOnError: true}
 
 // ConfigureAgent sets up the CI server with mage and GO
 func ConfigureAgent() {
@@ -40,6 +45,52 @@ func TestUnit() {
 // Test runs all types of tests
 func Test() {
 	magefile.Test()
+}
+
+func GitVersion() (string, error) {
+	var version string
+	out, err := sh.Output("git", "describe", "--tags")
+	if err != nil {
+		return "", fmt.Errorf("failed to run git describe: %w", err)
+	}
+	version = out
+	return version, nil
+}
+
+func ClientPlatform() (string, error) {
+	var platform string
+	out, err := sh.Output("go", "env", "GOOS")
+	if err != nil {
+		return "", fmt.Errorf("failed to run go env GOOS: %w", err)
+	}
+	platform = out
+	return platform, nil
+}
+
+func ClientArch() (string, error) {
+	var arch string
+	out, err := sh.Output("go", "env", "GOARCH")
+	if err != nil {
+		return "", fmt.Errorf("failed to run go env GOARCH: %w", err)
+	}
+	arch = out
+	return arch, nil
+}
+
+func TestIntegration() {
+	//	cp $(BINDIR)/$(VERSION)/$(MIXIN)-$(CLIENT_PLATFORM)-$(CLIENT_ARCH)$(FILE_EXT) $(BINDIR)/$(MIXIN)$(FILE_EXT)
+	//GO111MODULE=on go test -tags=integration ./tests/...
+
+	/* TODO: TestIntegration now yet working like it does in Makefile
+	bindir := mixinBin
+	version, err := GitVersion()
+	mixin := mixinName
+	client_platform, err := ClientPlatform()
+	client_arch, err := ClientArch()
+	runtime_platform := "linux"
+	file_ext := "" // .exe for windows runtime platform
+	*/
+	must.RunV("go", "test", "-tags=integration", "./tests/...")
 }
 
 // Publish the mixin to GitHub

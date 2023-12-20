@@ -5,8 +5,10 @@ go 1.18
 require (
 	get.porter.sh/magefiles v0.6.0
 	get.porter.sh/porter v0.29.1
+	github.com/carolynvs/magex v0.9.0
 	github.com/ghodss/yaml v1.0.0
 	github.com/gobuffalo/packr/v2 v2.8.3
+	github.com/magefile/mage v1.15.0
 	github.com/spf13/cobra v1.7.0
 	github.com/stretchr/testify v1.8.0
 	github.com/xeipuuv/gojsonschema v1.2.0
@@ -21,7 +23,6 @@ require (
 	github.com/PuerkitoBio/goquery v1.5.0 // indirect
 	github.com/andybalholm/brotli v1.0.1 // indirect
 	github.com/andybalholm/cascadia v1.0.0 // indirect
-	github.com/carolynvs/magex v0.9.0 // indirect
 	github.com/cbroglie/mustache v1.0.1 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/dsnet/compress v0.0.2-0.20210315054119-f66993602bf5 // indirect
@@ -32,7 +33,6 @@ require (
 	github.com/karrick/godirwalk v1.17.0 // indirect
 	github.com/klauspost/compress v1.15.1 // indirect
 	github.com/klauspost/pgzip v1.2.5 // indirect
-	github.com/magefile/mage v1.15.0 // indirect
 	github.com/markbates/errx v1.1.0 // indirect
 	github.com/markbates/oncer v1.0.0 // indirect
 	github.com/markbates/safe v1.0.1 // indirect

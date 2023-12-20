@@ -1,5 +1,5 @@
 MIXIN = yq
-PKG = github.com/squillace/porter-yq
+PKG = github.com/KurtSchenk/porter-yq
 SHELL = bash
 
 GO = GO111MODULE=on go
