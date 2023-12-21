@@ -49,24 +49,26 @@ install:
       outputs:
       - name: test_output
         regex: "(.*)"
+
   - yq:
-      description: "Test yq mixin"
+      description: "yq mixin version"
       arguments: 
         - "--version"
+
   - yq:
-      description: "yq data.xml" # has dependency on jq, so need to install
+      description: "Extract name from data.xml using yq" # has dependency on jq, so need to install
       arguments:
         - "'.name'"
         - "data.yaml"
       outputs:
         - name: name
           regex: "(.*)"
+
   - exec:
-      description: "Output name"
+      description: "Echo the name saved to output from the previous step"
       command: ./helpers.sh
       arguments:
         - write
-#        - "Hello there"
         - ${  bundle.outputs.name }
 
 # Define the steps that should execute when the bundle is upgraded
