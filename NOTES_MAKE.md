@@ -1,11 +1,13 @@
-# Use Mage instead. See NOTES_MAGE.md
-
+# Use Mage instead. See [NOTES_MAGE.md](./NOTES_MAGE.md)
+# Make notes
 * Installed go in WSL, but ended up not using. Ran go in container instead (see below)
+```bash
 apt  install golang-go
 go version go1.18.1 linux/amd64
+```
 * Had to update Makefile to get packr2 working. Go 1.16 and higher should be "go install" not "go get"
 * Instead of running make commands in WSL / Ubuntu I ran in golang container using debian:bullseye, matching bundle template.Dockerfile
-
+```bash
 docker run -it -v /home/src/KurtSchenk/porter-yq:/go/src golang:bullseye bash
 root@fc2ead9c8925:/go# ls      
 bin  src
@@ -18,26 +20,26 @@ cd pkg/yq && packr2 clean
 rm -fr bin/
 GO111MODULE=on go mod tidy
 [...]
-
+```
 * You may get this error running "make clean ..." If so do following
-
+```bash
 ./pkg/mod/github.com/gobuffalo/packr/v2@v2.8.3/packr2/cmd/fix/imports.go:16:2: missing go.sum entry for module providing package golang.org/x/tools/go/ast/astutil (imported by github.com/gobuffalo/packr/v2/packr2/cmd/fix); to add:
         go get github.com/gobuffalo/packr/v2/packr2/cmd/fix@v2.8.3
 make: *** [Makefile:52: packr2] Error 1
 
 root@6ee80c2e8881:/go/src# go get github.com/gobuffalo/packr/v2/packr2/cmd/fix@v2.8.3
 go: downloading golang.org/x/tools v0.13.0
-
+```
 * This created the binary for the mixin
 * Next copy mixin binaries to .porter folder
-
+```bash
 root@fc2ead9c8925:/go/src# make install
 mkdir -p /root/.porter/mixins/yq/runtimes/
 install bin/mixins/yq/yq /root/.porter/mixins/yq/yq
 install bin/mixins/yq/yq-runtime /root/.porter/mixins/yq/runtimes/yq-runtime
-
+```
 * Above copies mixin binaries in the container, so do the same outside of it.
-
+```bash
 (base) root@DESKTOP-3Q08DV2:~/.porter/mixins# mkdir yq
 (base) root@DESKTOP-3Q08DV2:~/.porter/mixins# ls
 cache.json  exec  helm  helm3  kubernetes  yq
@@ -52,10 +54,10 @@ cache.json  exec  helm  helm3  kubernetes  yq
   helm3       v1.0.1   Mohamed Chorfa   
   kubernetes  v1.0.2   Porter Authors   
   yq          v0.1.0   ralph squillace  
-
+```
 * Now I can use yq mixin in porter.yaml
 * And install and uninstall
-
+```bash
 (base) root@DESKTOP-3Q08DV2:/home/src/KurtSchenk/porter-yq/tests/bundle# porter install
 executing install action from porter-custom-mixin (installation: /porter-custom-mixin)
 Install Hello World
@@ -74,8 +76,8 @@ executing uninstall action from porter-custom-mixin (installation: /porter-custo
 Uninstall Hello World
 Goodbye World
 execution completed successfully!
-
-  * To use the mixin in a bundle see NOTES_BUNDLE.md
+```
+  * To use the mixin in a bundle see [NOTES_BUNDLE.md](./NOTES_BUNDLE.md)
 
 # TODO
 Not that PKG is "PKG = github.com/squillace/porter-yq"

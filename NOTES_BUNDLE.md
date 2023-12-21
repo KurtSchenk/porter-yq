@@ -1,13 +1,9 @@
+* First create, compile and install yq mixin. See [NOTES_MAGE.md](./NOTES_MAGE.md)
 * There is a test bundle that uses this yq mixin. To run go to ./tests/bundle
 * And there you can run 
 
-(base) root@DESKTOP-3Q08DV2:/home/src/KurtSchenk/porter-yq/tests/bundle# porter uninstall
-uninstalling bundle
-executing uninstall action from porter-custom-mixin (installation: /porter-custom-mixin)
-Uninstall Hello World
-Goodbye World
-execution completed successfully!
-(base) root@DESKTOP-3Q08DV2:/home/src/KurtSchenk/porter-yq/tests/bundle# porter install
+```
+bash (base) root@DESKTOP-3Q08DV2:/home/src/KurtSchenk/porter-yq/tests/bundle# porter install
 executing install action from porter-custom-mixin (installation: /porter-custom-mixin)
 Install Hello World
 Hello World
@@ -18,10 +14,12 @@ Extract name from data.xml using yq
 Echo the name saved to output from the previous step
 My name
 execution completed successfully!
+```
 
-* Show bunlde output from installation
+* Show bundle output from installation
 
-base) root@DESKTOP-3Q08DV2:/home/src/KurtSchenk/porter-yq/tests/bundle# porter installation list
+```
+bash (base) root@DESKTOP-3Q08DV2:/home/src/KurtSchenk/porter-yq/tests/bundle# porter installation list
 ---------------------------------------------------------------------------------
   NAMESPACE  NAME                 VERSION  STATE        STATUS     MODIFIED      
 ---------------------------------------------------------------------------------
@@ -34,4 +32,5 @@ base) root@DESKTOP-3Q08DV2:/home/src/KurtSchenk/porter-yq/tests/bundle# porter i
 ------------------------------------
   name         string  "My name"    
                                     
-  test_output  string  Hello World  
+  test_output  string  Hello World
+  ```
