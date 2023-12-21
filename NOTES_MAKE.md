@@ -1,3 +1,5 @@
+# Use Mage instead. See NOTES_MAGE.md
+
 * Installed go in WSL, but ended up not using. Ran go in container instead (see below)
 apt  install golang-go
 go version go1.18.1 linux/amd64
@@ -72,6 +74,8 @@ executing uninstall action from porter-custom-mixin (installation: /porter-custo
 Uninstall Hello World
 Goodbye World
 execution completed successfully!
+
+  * To use the mixin in a bundle see NOTES_BUNDLE.md
 
 # TODO
 Not that PKG is "PKG = github.com/squillace/porter-yq"
